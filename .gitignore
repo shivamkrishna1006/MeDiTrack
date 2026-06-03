@@ -1,0 +1,48 @@
+# Build
+**/target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Maven wrapper jar (binary)
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.project
+.classpath
+.settings/
+.sts4-cache/
+.apt_generated
+.factorypath
+.springBeans
+
+# Runtime / local data
+storage/
+**/storage/documents/
+
+# Secrets (use .env locally — see .env.example)
+.env
+.env.local
+*.pem
+*.key
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# NetBeans / Gradle (if added later)
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/

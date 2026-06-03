@@ -1,0 +1,67 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: management-postgres
+    environment:
+      POSTGRES_DB: management
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d management"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - management-network
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    container_name: management-mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - management-network
+
+  app:
+    build:
+      context: ./management
+    container_name: management-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mailhog:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/management
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-postgres}
+      JWT_SECRET: ${JWT_SECRET:-change-this-secret-key-change-this-secret-key-123456}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD:-Admin@12345}
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+      DOCUMENT_STORAGE_DIR: /app/storage/documents
+    ports:
+      - "4000:4000"
+    volumes:
+      - document-storage:/app/storage/documents
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:4000/actuator/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+    networks:
+      - management-network
+
+volumes:
+  postgres-data:
+  document-storage:
+
+networks:
+  management-network:

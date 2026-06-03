@@ -1,0 +1,47 @@
+### Dashboard summary
+GET http://localhost:4000/api/v1/dashboard/summary
+Authorization: Bearer {{token}}
+
+### Upload document
+POST http://localhost:4000/api/v1/documents
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="patientId"
+
+123e4567-e89b-12d3-a456-426614174000
+--boundary
+Content-Disposition: form-data; name="documentType"
+
+LAB_REPORT
+--boundary
+Content-Disposition: form-data; name="file"; filename="report.txt"
+Content-Type: text/plain
+
+Sample lab report content
+--boundary--
+
+### List documents
+GET http://localhost:4000/api/v1/documents?patientId=123e4567-e89b-12d3-a456-426614174000
+Authorization: Bearer {{token}}
+
+### Queue notification
+POST http://localhost:4000/api/v1/notifications
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "type": "APPOINTMENT_REMINDER",
+  "recipientEmail": "john.doe@example.com",
+  "subject": "Appointment reminder",
+  "body": "Your appointment is coming up."
+}
+
+### Send pending notifications
+POST http://localhost:4000/api/v1/notifications/send-pending
+Authorization: Bearer {{token}}
+
+### Audit logs
+GET http://localhost:4000/api/v1/audit-logs?page=0&size=20
+Authorization: Bearer {{token}}

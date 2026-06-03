@@ -1,0 +1,29 @@
+### Create medical record
+POST http://localhost:4000/api/v1/medical-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "patientId": "123e4567-e89b-12d3-a456-426614174000",
+  "doctorId": "423e4567-e89b-12d3-a456-426614174000",
+  "visitDate": "2026-06-03",
+  "diagnosis": "Seasonal allergy",
+  "allergies": "Pollen",
+  "notes": "Follow-up in two weeks"
+}
+
+### Create prescription
+POST http://localhost:4000/api/v1/prescriptions
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "patientId": "123e4567-e89b-12d3-a456-426614174000",
+  "doctorId": "423e4567-e89b-12d3-a456-426614174000",
+  "medicationName": "Cetirizine",
+  "dosage": "10 mg",
+  "frequency": "Once daily",
+  "durationInDays": 7,
+  "instructions": "Take after dinner",
+  "status": "ACTIVE"
+}

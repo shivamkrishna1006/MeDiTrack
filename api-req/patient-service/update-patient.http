@@ -1,0 +1,11 @@
+PUT http://localhost:4000/api/v1/patients/223e4567-e89b-12d3-a456-426614174012
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstName": "shivam",
+  "lastName": "kumar",
+  "email": "shivamk@gmail.com",
+  "address": "123 Main St",
+  "dateOfBirth": "2002-05-19"
+}

@@ -1,0 +1,40 @@
+### Create doctor
+POST http://localhost:4000/api/v1/doctors
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstName": "Anaya",
+  "lastName": "Rao",
+  "email": "anaya.rao@hospital.com",
+  "specialization": "Neurology",
+  "phoneNumber": "+91-9876500100"
+}
+
+### Create appointment
+POST http://localhost:4000/api/v1/appointments
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "patientId": "123e4567-e89b-12d3-a456-426614174000",
+  "doctorId": "423e4567-e89b-12d3-a456-426614174000",
+  "appointmentTime": "2030-01-10T11:00:00",
+  "durationMinutes": 30,
+  "status": "SCHEDULED",
+  "notes": "Follow-up"
+}
+
+### Create billing record
+POST http://localhost:4000/api/v1/billing-records
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "patientId": "123e4567-e89b-12d3-a456-426614174000",
+  "invoiceNumber": "INV-2001",
+  "amount": 1500.00,
+  "status": "PENDING",
+  "dueDate": "2030-01-20",
+  "description": "Consultation fee"
+}

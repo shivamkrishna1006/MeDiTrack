@@ -1,0 +1,13 @@
+### Create patient (LocalDate fields must be ISO-8601: yyyy-MM-dd)
+POST http://localhost:4000/api/v1/patients
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstName": "shivam",
+  "lastName": "krishna",
+  "email": "shivam@gmail.com",
+  "address": "123 Main St",
+  "dateOfBirth": "2002-05-19",
+  "registeredDate": "2026-04-03"
+}
