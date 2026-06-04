@@ -1,4 +1,4 @@
-# Data Manager
+# MeDiTrack
 
 Spring Boot backend for healthcare data management: patients, doctors, appointments, medical records, prescriptions, billing, documents, notifications, audit logs, and dashboards.
 
